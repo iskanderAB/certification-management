@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit WorkCertificate{% endblock %}
+
+{% block body %}
+    <h1>Edit WorkCertificate</h1>
+
+    {{ include('work_certificate/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_work_certificate_index') }}">back to list</a>
+
+    {{ include('work_certificate/_delete_form.html.twig') }}
+{% endblock %}

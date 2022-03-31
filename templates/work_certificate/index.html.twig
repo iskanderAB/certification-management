@@ -1,0 +1,140 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  WorkCertificate index
+{% endblock %}
+
+{% block body %}
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">
+        DataTables Example
+      </h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered"
+          id="dataTable"
+          width="100%"
+          cellspacing="0">
+          <thead>
+            <tr>
+              <th>
+                Id
+              </th>
+              <th>
+                CreatedAt
+              </th>
+              <th>
+                actions
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for work_certificate in work_certificates %}
+              <tr>
+                <td>
+                  {{ work_certificate.id }}
+                </td>
+                <td>
+                  {{ work_certificate.createdAt
+                    ? work_certificate.createdAt|date('Y-m-d H:i:s')
+                    : '' 
+                  }}
+                </td>
+                <td>
+                  <a href="{{
+                    path(
+                      'app_work_certificate_show',
+                      {
+                        id: work_certificate.id
+                      }
+                    )
+                    }}">
+                    show
+                  </a>
+                  <a href="{{
+                    path(
+                      'app_work_certificate_edit',
+                      {
+                        id: work_certificate.id
+                      }
+                    )
+                    }}">
+                    edit
+                  </a>
+                </td>
+              </tr>
+            {% else %}
+              <tr>
+                <td colspan="3">
+                  no records found
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  {# <table class="table">
+    <thead>
+      <tr>
+        <th>
+          Id
+        </th>
+        <th>
+          CreatedAt
+        </th>
+        <th>
+          actions
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for work_certificate in work_certificates %}
+        <tr>
+          <td>
+            {{ work_certificate.id }}
+          </td>
+          <td>
+            {{ work_certificate.createdAt
+              ? work_certificate.createdAt|date('Y-m-d H:i:s')
+              : '' }}
+          </td>
+          <td>
+            <a href="{{
+              path(
+                'app_work_certificate_show',
+                {
+                  id: work_certificate.id
+                }
+              )
+              }}">
+              show
+            </a>
+            <a href="{{
+              path(
+                'app_work_certificate_edit',
+                {
+                  id: work_certificate.id
+                }
+              )
+              }}">
+              edit
+            </a>
+          </td>
+        </tr>
+      {% else %}
+        <tr>
+          <td colspan="3">
+            no records found
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table> #}
+
+  <a href="{{ path('app_work_certificate_new') }}">Create new</a>
+{% endblock %}
