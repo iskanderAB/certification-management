@@ -13,7 +13,7 @@ class WorkCertificateType extends AbstractType
     {
         $builder
             ->add('createdAt')
-            ->add('worker')
+            // ->add('worker')
         ;
     }
 

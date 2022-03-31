@@ -76,7 +76,7 @@
             aria-expanded="true"
             aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
-            <span>Components</span>
+            <span>Employé</span>
           </a>
           <div id="collapseTwo"
             class="collapse"
@@ -84,10 +84,10 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
               <h6 class="collapse-header">
-                Custom Components:
+                Gestion d'employé
               </h6>
-              <a class="collapse-item" href="buttons.html">Buttons</a>
-              <a class="collapse-item" href="cards.html">Cards</a>
+              <a class="collapse-item" href="{{path('app_worker_index')}}">Liste d'employés </a>
+              <a class="collapse-item" href="{{path('app_worker_new')}}">Ajouter un employé </a>
             </div>
           </div>
         </li>
@@ -462,29 +462,11 @@
 
           <!-- Begin Page Content -->
           <div class="container-fluid">
-
-
-
-            
-            
-            
-            
-            
-            
-            
             {% block body %}
-                {# TODO #}
+                {# TODO: #}
             {% endblock %}
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          </div>
+
+        </div>
         </div>
       </div>
 

@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/")
- * @Route("/work/certificate")
+ * @Route("/workcertificate")
  */
 class WorkCertificateController extends AbstractController
 {

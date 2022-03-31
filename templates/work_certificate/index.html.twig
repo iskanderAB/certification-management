@@ -23,6 +23,12 @@
                 Id
               </th>
               <th>
+                Responsable
+              </th>
+              <th>
+                employée
+              </th>
+              <th>
                 CreatedAt
               </th>
               <th>
@@ -37,8 +43,15 @@
                   {{ work_certificate.id }}
                 </td>
                 <td>
+                  {{ work_certificate.createdBy ? work_certificate.createdBy.fullname : '' }}
+                </td>
+                <td>
+                  {{  work_certificate.worker ? work_certificate.worker.firstname  : '' }}
+                  {{  work_certificate.worker ? work_certificate.worker.lastname : '' }}
+                </td>
+                <td>
                   {{ work_certificate.createdAt
-                    ? work_certificate.createdAt|date('Y-m-d H:i:s')
+                    ? work_certificate.createdAt|date('Y/m/d')
                     : '' 
                   }}
                 </td>

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -34,6 +36,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity=WorkCertificate::class, mappedBy="createdBy")
+     */
+    private $workCertificates;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $fullName;
+
+    public function __construct()
+    {
+        $this->workCertificates = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -122,5 +139,47 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, WorkCertificate>
+     */
+    public function getWorkCertificates(): Collection
+    {
+        return $this->workCertificates;
+    }
+
+    public function addWorkCertificate(WorkCertificate $workCertificate): self
+    {
+        if (!$this->workCertificates->contains($workCertificate)) {
+            $this->workCertificates[] = $workCertificate;
+            $workCertificate->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWorkCertificate(WorkCertificate $workCertificate): self
+    {
+        if ($this->workCertificates->removeElement($workCertificate)) {
+            // set the owning side to null (unless already changed)
+            if ($workCertificate->getCreatedBy() === $this) {
+                $workCertificate->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getFullName(): ?string
+    {
+        return $this->fullName;
+    }
+
+    public function setFullName(string $fullName): self
+    {
+        $this->fullName = $fullName;
+
+        return $this;
     }
 }
