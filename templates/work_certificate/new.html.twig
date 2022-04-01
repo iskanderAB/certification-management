@@ -3,9 +3,18 @@
 {% block title %}New WorkCertificate{% endblock %}
 
 {% block body %}
-    <h1>Create new WorkCertificate</h1>
+    <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">
+        Créer un nouveau certificat de travail
+      </h6>
+    </div>
+    <div class="card-body">
+     {{ include('work_certificate/_form.html.twig') }}
+    </div>
+    </div>
+  </div>
 
-    {{ include('work_certificate/_form.html.twig') }}
 
     <a href="{{ path('app_work_certificate_index') }}">back to list</a>
 {% endblock %}

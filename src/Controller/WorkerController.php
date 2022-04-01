@@ -35,6 +35,7 @@ class WorkerController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+           
             $workerRepository->add($worker);
             return $this->redirectToRoute('app_worker_index', [], Response::HTTP_SEE_OTHER);
         }

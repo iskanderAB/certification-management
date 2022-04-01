@@ -6,6 +6,7 @@ use App\Entity\Worker;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class WorkerType extends AbstractType
 {
@@ -16,7 +17,12 @@ class WorkerType extends AbstractType
             ->add('lastname')
             ->add('cin')
             ->add('ref')
-            ->add('type')
+            ->add('type', ChoiceType::class, [
+                'choices' => [
+                    'stager' => 'stager',
+                    'motarassem' => 'motarassem',
+                ],
+            ])
         ;
     }
 

@@ -1,4 +1,38 @@
-{{ form_start(form) }}
+
+<div id="string-example-container" class="string-example-container"
+   data-example-string="{{workers| json_encode }}"
+></div>
+{{ form_start(form) }}  
     {{ form_widget(form) }}
+        <datalist id="references-list">
+            {%  for worker in workers %}
+                <option value="{{worker.ref}} ( -{{worker.firstname}} - {{worker.lastname}} - )">
+            {% endfor %}  
+        </datalist>
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+{% block javascripts %}
+    <script>
+        if (document.getElementById('certif_reference')){
+            let  datalist = []
+            const refInput = document.getElementById('certif_reference');
+            refInput.addEventListener('focusout', (event) => {
+                console.log(event.target.value);
+                const workers = document.getElementById('references-list').options
+                for(worker of workers) { 
+                    datalist.push(worker.value);
+                }
+                datalist =[...new Set(datalist)] ; 
+                if(datalist.includes(event.target.value)){
+                    console.log(event.target.value.split('-')[1]);
+                    document.getElementById('certif_firstname').value= event.target.value.split('-')[1]
+                    document.getElementById('certif_lastname').value= event.target.value.split('-')[2]
+                }
+                console.log(datalist)
+            }) 
+        }
+        else{
+            console.log("bye");
+        }
+    </script>      
+{% endblock %}

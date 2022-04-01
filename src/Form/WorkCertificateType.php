@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\WorkCertificate;
+use App\Entity\Worker;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -12,8 +14,16 @@ class WorkCertificateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('createdAt')
-            // ->add('worker')
+            ->add('worker', EntityType::class, [
+                // looks for choices from this entity
+                'class' => Worker::class,
+            
+                // uses the User.username property as the visible option string
+                'choice_label' => fn (Worker $worker)=>  $worker->getRef().'-('.$worker->getFirstname() .'_'. $worker->getLastname().')',
+                // used to render a select box, check boxes or radios
+                // 'multiple' => true,
+                // 'expanded' => true,
+            ] )
         ;
     }
 

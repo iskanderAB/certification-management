@@ -18,7 +18,7 @@ class WorkCertificate
     private $id;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="date")
      */
     private $createdAt;
 
@@ -32,17 +32,22 @@ class WorkCertificate
      */
     private $createdBy;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $chef;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -69,6 +74,18 @@ class WorkCertificate
     public function setCreatedBy(?User $createdBy): self
     {
         $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    public function getChef(): ?string
+    {
+        return $this->chef;
+    }
+
+    public function setChef(string $chef): self
+    {
+        $this->chef = $chef;
 
         return $this;
     }

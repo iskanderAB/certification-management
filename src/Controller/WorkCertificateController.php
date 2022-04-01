@@ -3,15 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\WorkCertificate;
+use App\Entity\Worker;
+use App\Form\CertifType;
 use App\Form\WorkCertificateType;
 use App\Repository\WorkCertificateRepository;
+use App\Repository\WorkerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @Route("/")
  * @Route("/workcertificate")
  */
 class WorkCertificateController extends AbstractController
@@ -19,7 +22,7 @@ class WorkCertificateController extends AbstractController
     /**
      * @Route("/", name="app_work_certificate_index", methods={"GET"})
      */
-    public function index(WorkCertificateRepository $workCertificateRepository): Response
+    public function index(WorkCertificateRepository $workCertificateRepository, ManagerRegistry $doctrine): Response
     {
         return $this->render('work_certificate/index.html.twig', [
             'work_certificates' => $workCertificateRepository->findAll(),
@@ -29,19 +32,36 @@ class WorkCertificateController extends AbstractController
     /**
      * @Route("/new", name="app_work_certificate_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, WorkCertificateRepository $workCertificateRepository): Response
+    public function new(Request $request, WorkCertificateRepository $workCertificateRepository,ManagerRegistry $doctrine,WorkerRepository $workerRepository): Response
     {
+        $entityManager = $doctrine->getManager();
         $workCertificate = new WorkCertificate();
-        $form = $this->createForm(WorkCertificateType::class, $workCertificate);
+        $worker = new Worker();
+        $form = $this->createForm(CertifType::class);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+            $workCertificate->setCreatedAt(new \DateTime());
+            $workCertificate->setCreatedBy($this->getUser());
+            $workCertificate->setChef($form['chef']->getData());
+            if ($workerRepository->findBy(["ref"=>$form['reference']->getData()]) == null){
+                $worker->setFirstname($form['firstname']->getData());
+                $worker->setLastname($form['lastname']->getData());
+                $worker->setRef($form['reference']->getData());
+                $worker->setGender($form['gender']->getData());
+                $worker->setType($form['type']->getData());
+                $entityManager->persist($worker);
+            }
+            else{
+                $worker = $workerRepository->findBy(["ref"=>$form['reference']->getData()]);
+            }
+            $workCertificate->setWorker($worker); // add worker object 
             $workCertificateRepository->add($workCertificate);
             return $this->redirectToRoute('app_work_certificate_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('work_certificate/new.html.twig', [
             'work_certificate' => $workCertificate,
+            'workers' => $workerRepository->findAll(),
             'form' => $form,
         ]);
     }

@@ -23,16 +23,19 @@
                 Id
               </th>
               <th>
-                Responsable
+                Créé par
               </th>
               <th>
-                employée
+                Employée
+              </th>
+              <th>
+                Genre
               </th>
               <th>
                 CreatedAt
               </th>
               <th>
-                actions
+                Actions
               </th>
             </tr>
           </thead>
@@ -48,6 +51,10 @@
                 <td>
                   {{  work_certificate.worker ? work_certificate.worker.firstname  : '' }}
                   {{  work_certificate.worker ? work_certificate.worker.lastname : '' }}
+                </td>
+                <td>
+                  {{ work_certificate.worker.gender == "M" ? "Male" : "Female" 
+                  }}
                 </td>
                 <td>
                   {{ work_certificate.createdAt

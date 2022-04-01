@@ -30,24 +30,29 @@ class Worker
     private $lastname;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $cin;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $ref;
 
     /**
-     * @ORM\Column(type="simple_array", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $type = [];
+    private $type;
 
     /**
      * @ORM\OneToMany(targetEntity=WorkCertificate::class, mappedBy="worker")
      */
     private $workCertificates;
+
+    /**
+     * @ORM\Column(type="string", length=1)
+     */
+    private $gender;
 
     public function __construct()
     {
@@ -107,12 +112,12 @@ class Worker
         return $this;
     }
 
-    public function getType(): ?array
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function setType(?array $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
@@ -145,6 +150,24 @@ class Worker
                 $workCertificate->setWorker(null);
             }
         }
+
+        return $this;
+    }
+
+
+    // public function __toString()
+    // {
+    //     return $this->getId();
+    // }   
+
+    public function getGender(): ?string
+    {
+        return $this->gender;
+    }
+
+    public function setGender(string $gender): self
+    {
+        $this->gender = $gender;
 
         return $this;
     }
