@@ -52,7 +52,7 @@ class WorkCertificateController extends AbstractController
                 $entityManager->persist($worker);
             }
             else{
-                $worker = $workerRepository->findBy(["ref"=>$form['reference']->getData()]);
+                $worker = $workerRepository->findBy(["ref"=>$form['reference']->getData()])[0];
             }
             $workCertificate->setWorker($worker); // add worker object 
             $workCertificateRepository->add($workCertificate);
