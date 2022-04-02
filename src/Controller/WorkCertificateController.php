@@ -36,14 +36,19 @@ class WorkCertificateController extends AbstractController
     {
         $entityManager = $doctrine->getManager();
         $workCertificate = new WorkCertificate();
-        $worker = new Worker();
+        
         $form = $this->createForm(CertifType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $workCertificate->setCreatedAt(new \DateTime());
             $workCertificate->setCreatedBy($this->getUser());
             $workCertificate->setChef($form['chef']->getData());
-            if ($workerRepository->findBy(["ref"=>$form['reference']->getData()]) == null){
+            $reference = explode(' ',trim($form['reference']->getData()))[0];
+
+            
+
+            if ($workerRepository->findBy(["ref"=> $reference ]) == null){
+                $worker = new Worker();
                 $worker->setFirstname($form['firstname']->getData());
                 $worker->setLastname($form['lastname']->getData());
                 $worker->setRef($form['reference']->getData());
@@ -52,7 +57,7 @@ class WorkCertificateController extends AbstractController
                 $entityManager->persist($worker);
             }
             else{
-                $worker = $workerRepository->findBy(["ref"=>$form['reference']->getData()])[0];
+                $worker = $workerRepository->findBy(["ref"=> $reference])[0];
             }
             $workCertificate->setWorker($worker); // add worker object 
             $workCertificateRepository->add($workCertificate);

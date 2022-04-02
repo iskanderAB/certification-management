@@ -1,39 +1,50 @@
 
-<div id="string-example-container" class="string-example-container"
-   data-example-string="{{workers| json_encode }}"
-></div>
-{{ form_start(form) }}  
-    {{ form_widget(form) }}
-        <datalist id="references-list">
-            {%  for worker in workers %}
-                <option value="{{worker.ref}} ( -{{worker.firstname}} - {{worker.lastname}} - )">
-            {% endfor %}  
-        </datalist>
-    <button class="btn">{{ button_label|default('Save') }}</button>
-     <button class="btn">{{ button_label|default('Imprimer') }}</button>
-{{ form_end(form) }}
-{% block javascripts %}
-    <script>
-        if (document.getElementById('certif_reference')){
-            let  datalist = []
-            const refInput = document.getElementById('certif_reference');
-            refInput.addEventListener('focusout', (event) => {
-                console.log(event.target.value);
-                const workers = document.getElementById('references-list').options
-                for(worker of workers) { 
-                    datalist.push(worker.value);
-                }
-                datalist =[...new Set(datalist)] ; 
-                if(datalist.includes(event.target.value)){
-                    console.log(event.target.value.split('-')[1]);
-                    document.getElementById('certif_firstname').value= event.target.value.split('-')[1]
-                    document.getElementById('certif_lastname').value= event.target.value.split('-')[2]
-                }
-                console.log(datalist)
-            }) 
-        }
-        else{
-            console.log("bye");
-        }
-    </script>      
-{% endblock %}
+<div class='container'>
+    {{ form_start(form) }}  
+        <div class="form-group">
+            {{ form_row(form.reference, {'attr': {'class': 'form-control'}}) }}
+        </div>
+            <datalist id="references-list">
+                {%  for worker in workers %}
+                    <option value="{{worker.ref}} ({{worker.firstname}}-{{worker.lastname}})">
+                {% endfor %}  
+            </datalist>
+        <div class="form-group">
+            {{ form_row(form.chef, {'attr': {'class': 'form-control'}}) }}  
+        </div>    
+        <div class="form-group">
+            {{ form_row(form.firstname, {'attr': {'class': 'form-control'}}) }}   
+        </div>    
+        <div class="form-group">
+            {{ form_row(form.lastname, {'attr': {'class': 'form-control'}}) }}   
+        </div>  
+        <div class="form-group">
+            {{ form_row(form.gender, {'attr': {'class': 'form-control'}}) }}          
+        </div>   
+        <div class="form-group">
+            {{ form_row(form.type,{'attr': {'class': 'form-control'}}) }}   
+        </div>         
+
+        <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+        <button class="btn btn-primary">{{ button_label|default('Imprimer') }}</button>
+    {{ form_end(form) }}
+    {% block javascripts %}
+        <script>
+            if (document.getElementById('certif_reference')){
+                document.getElementById("certif_reference")
+                    .addEventListener("input", function(event){
+                        if(event.inputType == "insertReplacementText" || event.inputType == null) {
+                            console.log(event.target.value.slice(event.target.value.indexOf('(')+1, event.target.value.indexOf(')')));
+                            const fullname = event.target.value.slice(event.target.value.indexOf('(')+1, event.target.value.indexOf(')')).split('-')
+                            document.getElementById('certif_firstname').value= fullname[0]
+                            document.getElementById('certif_lastname').value= fullname[1]
+
+                    }
+                })
+            }
+            else{
+                console.log("bye");
+            }
+        </script>      
+    {% endblock %}
+</div>

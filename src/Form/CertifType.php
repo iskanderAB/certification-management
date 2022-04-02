@@ -17,8 +17,10 @@ class CertifType extends AbstractType
                 'label' => 'Reference',
                 'attr'  =>
                 [
-                    'placeholder'   => 'reference',
-                    'list'          => 'references-list'
+                    'placeholder'   => 'reference . . .',
+                    'list'          => 'references-list',
+                    'autocomplete'  => 'off',
+                    'required' => true
                 ]
             ])
             ->add('chef', ChoiceType::class, [
@@ -27,8 +29,18 @@ class CertifType extends AbstractType
                     'chefWest' => "chefWest",
                 ]
             ])
-            ->add('firstname')
-            ->add('lastname')
+            ->add('firstname',TextType::class,[
+                'attr'  =>[
+                    'placeholder'   => 'Firstname . . .',
+                    'required' => true
+                    ]
+            ])
+            ->add('lastname',TextType::class,[
+                'attr'  =>[
+                    'placeholder'   => 'Lastname . . .',
+                    'required' => true
+                    ]
+            ])
             ->add('gender', ChoiceType::class, [
                 'choices' => [
                     'Male' => "M",
