@@ -12,8 +12,36 @@
                 <td>{{ work_certificate.id }}</td>
             </tr>
             <tr>
+                <th> Créé par</th>
+                <td>{{ work_certificate.createdBy.fullname }}</td>
+            </tr>
+            <tr>
+                <th> Signataire  </th>
+                <td>{{ work_certificate.signer }}</td>
+            </tr>
+            <tr>
+                <th> Chef  </th>
+                <td>{{ work_certificate.chef }}</td>
+            </tr>
+            <tr>
+                <th> Employée </th>
+                <td>{{ work_certificate.worker.lastname  }} {{ work_certificate.worker.firstname  }}</td>
+            </tr>
+            <tr>
+                <th> Matrecule </th>
+                <td>{{ work_certificate.worker.ref  }}</td>
+            </tr>
+            <tr>
+                <th> Poste </th>
+                <td>{{ work_certificate.worker.poste  }}</td>
+            </tr>
+            <tr>
+                <th> Gender  </th>
+                <td>{{ work_certificate.worker.gender }}</td>
+            </tr>
+            <tr>
                 <th>CreatedAt</th>
-                <td>{{ work_certificate.createdAt ? work_certificate.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ work_certificate.createdAt ? work_certificate.createdAt|date('Y-m-d') : '' }}</td>
             </tr>
         </tbody>
     </table>

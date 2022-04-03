@@ -54,6 +54,13 @@ class Worker
      */
     private $gender;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $poste;
+
+
+
     public function __construct()
     {
         $this->workCertificates = new ArrayCollection();
@@ -171,4 +178,17 @@ class Worker
 
         return $this;
     }
+
+    public function getPoste(): ?string
+    {
+        return $this->poste;
+    }
+
+    public function setPoste(string $poste): self
+    {
+        $this->poste = $poste;
+
+        return $this;
+    }
+
 }

@@ -14,7 +14,7 @@ class CertifType extends AbstractType
     {
         $builder
             ->add('reference', TextType::class, [
-                'label' => 'Reference',
+                'label' => 'Matricule',
                 'attr'  =>
                 [
                     'placeholder'   => 'reference . . .',
@@ -47,10 +47,22 @@ class CertifType extends AbstractType
                     'Female' => "F",
                 ]
             ])
+            ->add('poste', ChoiceType::class, [
+                'choices' => [
+                    'inspecteur' => "INSPECTEUR",
+                    'another job' => "JOB",
+                ]
+            ])
+            ->add('signer',TextType::class,[
+                'attr'  =>[
+                    'placeholder'   => 'Signataire . . .',
+                    'required' => true
+                    ]
+            ])
             ->add('type', ChoiceType::class, [
                 'choices' => [
-                    'stagier' => "stagier",
-                    'employée' => "employée",
+                    'STAGIER' => "STAGIER",
+                    'TITULAIRE' => "TITULAIRE",
                 ]
             ]);
     }

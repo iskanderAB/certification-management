@@ -43,10 +43,8 @@ class WorkCertificateController extends AbstractController
             $workCertificate->setCreatedAt(new \DateTime());
             $workCertificate->setCreatedBy($this->getUser());
             $workCertificate->setChef($form['chef']->getData());
+            $workCertificate->setSigner($form['signer']->getData());
             $reference = explode(' ',trim($form['reference']->getData()))[0];
-
-            
-
             if ($workerRepository->findBy(["ref"=> $reference ]) == null){
                 $worker = new Worker();
                 $worker->setFirstname($form['firstname']->getData());
@@ -54,6 +52,7 @@ class WorkCertificateController extends AbstractController
                 $worker->setRef($form['reference']->getData());
                 $worker->setGender($form['gender']->getData());
                 $worker->setType($form['type']->getData());
+                $worker->setPoste($form['poste']->getData());
                 $entityManager->persist($worker);
             }
             else{
