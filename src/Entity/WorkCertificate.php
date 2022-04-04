@@ -37,6 +37,11 @@ class WorkCertificate
      */
     private $chef;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $signer;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,18 @@ class WorkCertificate
     public function setChef(string $chef): self
     {
         $this->chef = $chef;
+
+        return $this;
+    }
+
+    public function getSigner(): ?string
+    {
+        return $this->signer;
+    }
+
+    public function setSigner(string $signer): self
+    {
+        $this->signer = $signer;
 
         return $this;
     }
