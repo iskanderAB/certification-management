@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New SalaryCertificate{% endblock %}
+
+{% block body %}
+    <h1>Create new SalaryCertificate</h1>
+
+    {{ include('salary_certificate/_form.html.twig') }}
+
+    <a href="{{ path('app_salary_certificate_index') }}">back to list</a>
+{% endblock %}

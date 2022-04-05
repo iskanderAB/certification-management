@@ -142,5 +142,6 @@ class WorkCertificateController extends AbstractController
         $dompdf->stream("attestation_".$workCertificate->getId().".pdf", [
             "Attachment" => false
         ]);
+        exit();
     }
 }

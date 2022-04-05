@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SalaryCertificate index{% endblock %}
+
+{% block body %}
+    <h1>SalaryCertificate index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>P1</th>
+                <th>P2</th>
+                <th>P3</th>
+                <th>P4</th>
+                <th>P5</th>
+                <th>P6</th>
+                <th>P7</th>
+                <th>P8</th>
+                <th>P9</th>
+                <th>P10</th>
+                <th>P11</th>
+                <th>P12</th>
+                <th>P13</th>
+                <th>P14</th>
+                <th>P15</th>
+                <th>P16</th>
+                <th>P17</th>
+                <th>P18</th>
+                <th>P19</th>
+                <th>P20</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for salary_certificate in salary_certificates %}
+            <tr>
+                <td>{{ salary_certificate.id }}</td>
+                <td>{{ salary_certificate.P1 }}</td>
+                <td>{{ salary_certificate.p2 }}</td>
+                <td>{{ salary_certificate.p3 }}</td>
+                <td>{{ salary_certificate.p4 }}</td>
+                <td>{{ salary_certificate.p5 }}</td>
+                <td>{{ salary_certificate.p6 }}</td>
+                <td>{{ salary_certificate.p7 }}</td>
+                <td>{{ salary_certificate.p8 }}</td>
+                <td>{{ salary_certificate.p9 }}</td>
+                <td>{{ salary_certificate.p10 }}</td>
+                <td>{{ salary_certificate.p11 }}</td>
+                <td>{{ salary_certificate.p12 }}</td>
+                <td>{{ salary_certificate.p13 }}</td>
+                <td>{{ salary_certificate.p14 }}</td>
+                <td>{{ salary_certificate.p15 }}</td>
+                <td>{{ salary_certificate.p16 }}</td>
+                <td>{{ salary_certificate.p17 }}</td>
+                <td>{{ salary_certificate.p18 }}</td>
+                <td>{{ salary_certificate.p19 }}</td>
+                <td>{{ salary_certificate.p20 }}</td>
+                <td>
+                    <a href="{{ path('app_salary_certificate_show', {'id': salary_certificate.id}) }}">show</a>
+                    <a href="{{ path('app_salary_certificate_edit', {'id': salary_certificate.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="22">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_salary_certificate_new') }}">Create new</a>
+{% endblock %}

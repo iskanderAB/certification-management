@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit SalaryCertificate{% endblock %}
+
+{% block body %}
+    <h1>Edit SalaryCertificate</h1>
+
+    {{ include('salary_certificate/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_salary_certificate_index') }}">back to list</a>
+
+    {{ include('salary_certificate/_delete_form.html.twig') }}
+{% endblock %}
