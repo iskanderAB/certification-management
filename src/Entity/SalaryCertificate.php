@@ -117,6 +117,7 @@ class SalaryCertificate
      */
     private $p20;
 
+   
 
     public function getId(): ?int
     {
@@ -362,5 +363,7 @@ class SalaryCertificate
 
         return $this;
     }
+
+    
 
 }

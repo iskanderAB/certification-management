@@ -9,7 +9,7 @@
     SalaryCertificate
   </h1>
 
-  <table class="table">
+  <!-- <table class="table">
     <tbody>
       <tr>
         <th>
@@ -181,6 +181,8 @@
       </tr>
     </tbody>
   </table>
+  -->
+
 
   <p style="text-align: center;">
     <br />DIRECTION CENTRALE DE L'EXPLOITATION DU RESEAU FERROVIAIRE TUNISIEN
@@ -199,7 +201,26 @@
   </p>
   <p>
     MR KHMAIES TLICH matricule 2458745G (TITULAIRE) percoit un salaire mensuel
-    brut (de chifre) ,se decomposant comme suit:
+    brut  #{% set sb = salary_certificate.p20 + 
+            salary_certificate.p19 + 
+            salary_certificate.p18  +
+             salary_certificate.p17 +
+             salary_certificate.p16 +
+             salary_certificate.p15 +
+             salary_certificate.p14 +
+             salary_certificate.p13 +
+             salary_certificate.p12 +
+             salary_certificate.p11 +
+             salary_certificate.p10 +
+             salary_certificate.p9 +
+             salary_certificate.p8 +
+             salary_certificate.p7 +
+             salary_certificate.p6 +
+             salary_certificate.p5 +
+             salary_certificate.p4 +
+             salary_certificate.p3 +
+             salary_certificate.p2 +
+             salary_certificate.p1 %} {{ sb }}# ,se decomposant comme suit:
   </p>
   <table style="border-collapse: collapse; width: 97.0994%; height: 396px;"
     border="1">
@@ -209,7 +230,7 @@
           Element global mensuel
         </td>
         <td style="width: 26.7401%; height: 18px;">
-          &nbsp;
+                    {{ salary_certificate.P1 }}
         </td>
       </tr>
       <tr style="height: 18px;">
@@ -217,7 +238,7 @@
           Indemnite de logement
         </td>
         <td style="width: 26.7401%; height: 18px;">
-          &nbsp;
+          {{ salary_certificate.p2 }}
         </td>
       </tr>
       <tr style="height: 18px;">
@@ -225,7 +246,7 @@
           Prime de bilan mensuel
         </td>
         <td style="width: 26.7401%; height: 18px;">
-          &nbsp;
+          {{ salary_certificate.p3 }}
         </td>
       </tr>
       <tr style="height: 18px;">
@@ -233,7 +254,7 @@
           Prime de service mensuel
         </td>
         <td style="width: 26.7401%; height: 18px;">
-          &nbsp;
+          {{ salary_certificate.p4 }}
         </td>
       </tr>
       <tr style="height: 18px;">
@@ -241,7 +262,7 @@
           Indemnite transport mensuel
         </td>
         <td style="width: 26.7401%; height: 18px;">
-          &nbsp;
+         {{ salary_certificate.p5 }}
         </td>
       </tr>
       <tr style="height: 18px;">
@@ -249,7 +270,7 @@
           Allocation familiale
         </td>
         <td style="width: 26.7401%; height: 18px;">
-          &nbsp;
+          {{ salary_certificate.p6 }}
         </td>
       </tr>
       <tr style="height: 18px;">
@@ -257,7 +278,7 @@
           Prime de rendement mensuel + PRC
         </td>
         <td style="width: 26.7401%; height: 18px;">
-          &nbsp;
+          {{ salary_certificate.p7 }}
         </td>
       </tr>
       <tr style="height: 18px;">
@@ -265,7 +286,7 @@
           Prime fin d'annee mensuel
         </td>
         <td style="width: 26.7401%; height: 18px;">
-          &nbsp;
+          {{ salary_certificate.p8 }}
         </td>
       </tr>
       <tr style="height: 18px;">
@@ -273,7 +294,7 @@
           Prime d'exploitation
         </td>
         <td style="width: 26.7401%; height: 18px;">
-          &nbsp;
+          {{ salary_certificate.p9 }}
         </td>
       </tr>
       <tr style="height: 18px;">
@@ -281,7 +302,7 @@
           Indemnit&eacute;s compl&eacute;mentaire provisoire
         </td>
         <td style="width: 26.7401%; height: 18px;">
-          &nbsp;
+          {{ salary_certificate.p10 }}
         </td>
       </tr>
       <tr style="height: 18px;">
@@ -289,7 +310,7 @@
           Prime de manoeuvre
         </td>
         <td style="width: 26.7401%; height: 18px;">
-          &nbsp;
+          {{ salary_certificate.p11 }}
         </td>
       </tr>
       <tr style="height: 18px;">
@@ -297,7 +318,7 @@
           Prime de maintenance
         </td>
         <td style="width: 26.7401%; height: 18px;">
-          &nbsp;
+          {{ salary_certificate.p12 }}
         </td>
       </tr>
       <tr style="height: 18px;">
@@ -305,7 +326,7 @@
           Prime de panier
         </td>
         <td style="width: 26.7401%; height: 18px;">
-          &nbsp;
+          {{ salary_certificate.p13 }}
         </td>
       </tr>
       <tr style="height: 18px;">
@@ -313,7 +334,7 @@
           Indemnit&eacute; de nuit
         </td>
         <td style="width: 26.7401%; height: 18px;">
-          &nbsp;
+          {{ salary_certificate.p14 }}
         </td>
       </tr>
       <tr style="height: 18px;">
@@ -321,7 +342,7 @@
           Charge fiscale additionnelle
         </td>
         <td style="width: 26.7401%; height: 18px;">
-          &nbsp;
+          {{ salary_certificate.p15 }}
         </td>
       </tr>
       <tr style="height: 18px;">
@@ -329,7 +350,7 @@
           Majoration prime sp&eacute;cifique
         </td>
         <td style="width: 26.7401%; height: 18px;">
-          &nbsp;
+          {{ salary_certificate.p16 }}
         </td>
       </tr>
       <tr style="height: 18px;">
@@ -337,7 +358,7 @@
           Augmentation PFA
         </td>
         <td style="width: 26.7401%; height: 18px;">
-          &nbsp;
+          {{ salary_certificate.p17 }}
         </td>
       </tr>
       <tr style="height: 18px;">
@@ -345,7 +366,7 @@
           Indemnit&eacute; de fonction
         </td>
         <td style="width: 26.7401%; height: 18px;">
-          &nbsp;
+          {{ salary_certificate.p18 }}
         </td>
       </tr>
       <tr style="height: 18px;">
@@ -353,7 +374,7 @@
           Indemnit&eacute; kilom&eacute;trique forfaitaire
         </td>
         <td style="width: 26.7401%; height: 18px;">
-          &nbsp;
+          {{ salary_certificate.p19 }}
         </td>
       </tr>
       <tr style="height: 18px;">
@@ -361,7 +382,7 @@
           Autres indemnites
         </td>
         <td style="width: 26.7401%; height: 18px;">
-          &nbsp;
+          {{ salary_certificate.p20 }}
         </td>
       </tr>
       <tr style="height: 18px;">
@@ -369,7 +390,27 @@
           SALAIRE MENSUEL BRUT
         </td>
         <td style="width: 26.7401%; height: 18px;">
-          &nbsp;
+          {% set sb = salary_certificate.p20 + 
+            salary_certificate.p19 + 
+            salary_certificate.p18  +
+             salary_certificate.p17 +
+             salary_certificate.p16 +
+             salary_certificate.p15 +
+             salary_certificate.p14 +
+             salary_certificate.p13 +
+             salary_certificate.p12 +
+             salary_certificate.p11 +
+             salary_certificate.p10 +
+             salary_certificate.p9 +
+             salary_certificate.p8 +
+             salary_certificate.p7 +
+             salary_certificate.p6 +
+             salary_certificate.p5 +
+             salary_certificate.p4 +
+             salary_certificate.p3 +
+             salary_certificate.p2 +
+             salary_certificate.p1 %}
+          {{ sb }}
         </td>
       </tr>
       <tr style="height: 18px;">
@@ -377,7 +418,7 @@
           SALAIRE ANNUEL BRUT
         </td>
         <td style="width: 26.7401%; height: 18px;">
-          &nbsp;
+          {{ sb * 12 }}
         </td>
       </tr>
     </tbody>
