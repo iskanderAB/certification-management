@@ -17,7 +17,7 @@ class CertifType extends AbstractType
                 'label' => 'Matricule',
                 'attr'  =>
                 [
-                    'placeholder'   => 'reference . . .',
+                    'placeholder'   => 'Matricule . . .',
                     'list'          => 'references-list',
                     'autocomplete'  => 'off',
                     'required' => true
@@ -25,26 +25,26 @@ class CertifType extends AbstractType
             ])
             ->add('chef', ChoiceType::class, [
                 'choices' => [
-                    'chefNord' => "chefNord",
-                    'chefWest' => "chefWest",
+                    'le Chef du Département de la Zona Nord Est' => "le Chef du Département de la Zona Nord Est",
+                    'le chef du division administrative et gestion' => "le chef du division administrative et gestion",
                 ]
             ])
             ->add('firstname',TextType::class,[
                 'attr'  =>[
-                    'placeholder'   => 'Firstname . . .',
+                    'placeholder'   => 'Nom . . .',
                     'required' => true
                     ]
             ])
             ->add('lastname',TextType::class,[
                 'attr'  =>[
-                    'placeholder'   => 'Lastname . . .',
+                    'placeholder'   => 'prénom . . .',
                     'required' => true
                     ]
             ])
             ->add('gender', ChoiceType::class, [
                 'choices' => [
-                    'Male' => "M",
-                    'Female' => "F",
+                    'Homme' => "H",
+                    'Famme' => "F",
                 ]
             ])
             ->add('poste', ChoiceType::class, [
@@ -61,8 +61,8 @@ class CertifType extends AbstractType
             ])
             ->add('type', ChoiceType::class, [
                 'choices' => [
-                    'STAGIER' => "STAGIER",
                     'TITULAIRE' => "TITULAIRE",
+                    'STAGIER' => "STAGIER",
                 ]
             ]);
     }
