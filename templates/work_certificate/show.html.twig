@@ -1,64 +1,77 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        *{
+            font-size: 18; 
+        }
+        img { 
+            width:90%;
+            height:100px;
+            position: relative;
+            display: block;
+            margin-left: 30px;
+            margin-bottom: 50px;
+        }
+        .title-container{
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+            line-height: 10%;
+        }
+        .head-text span{ 
+            float: left;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+  <div>
+   <img src="{{ app.request.getSchemeAndHttpHost()}}/img/cnsft.png" alt="Mon logo">
+   <div class="title-container">
+    <p>
+      DEPARTEMENT DE LA ZONE NORD EST
+    </p>
+    <p style="">
+      DIVISION ADMINISTRATIVE ET GESTION
+    </p>
+    </div>
+    <div class='head-text'>
+        <span>
+          N&deg;: {{ work_certificate.id }}
+        </span>
+        <span style="margin-left: 50%">
+          
+          TUNIS LE : {{ work_certificate.createdAt ? work_certificate.createdAt|date('Y-m-d') : '' }} 
+        </span>
+    </div>
+    <p style="text-align: left;">
+      &nbsp;
+    </p>
+    <p>
+      Je soussign&eacute;, le Chef du D&eacute;partement de la Zona {{ work_certificate.chef }}
+      certifie que {{ work_certificate.worker.gender == "M" ? "Mr" : "Mme" }} {{ work_certificate.worker.lastname }} {{ work_certificate.worker.firstname }} matricule {{ work_certificate.worker.ref }} ({{ work_certificate.worker.type }}) est au service de
+      la SNCFT en qualit&eacute; d'{{ work_certificate.worker.poste }}.
+    </p>
+    <p>
+      &nbsp;La pr&eacute;sente attestation est d&eacute;livr&eacute;e &agrave;
+      l'int&eacute;ress&eacute; sur sa demande pour servir et valoir ce que de
+      droit.
+    </p>
+    <p style="text-align: center;">
+      <u>
+        Le Chef du D&eacute;partement de la Zone Nord Est
+      </u>
+    </p>
+    <p style="text-align: center;">
+      <u>
+        {{ work_certificate.signer }}
+      </u>
+    </p>
+  </div>
 
-{% block title %}WorkCertificate{% endblock %}
-
-{% block body %}
-    <h1>WorkCertificate</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ work_certificate.id }}</td>
-            </tr>
-            <tr>
-                <th> Créé par</th>
-                <td>{{ work_certificate.createdBy.fullname }}</td>
-            </tr>
-            <tr>
-                <th> Signataire  </th>
-                <td>{{ work_certificate.signer }}</td>
-            </tr>
-            <tr>
-                <th> Chef  </th>
-                <td>{{ work_certificate.chef }}</td>
-            </tr>
-            <tr>
-                <th> Employée </th>
-                <td>{{ work_certificate.worker.lastname  }} {{ work_certificate.worker.firstname  }}</td>
-            </tr>
-            <tr>
-                <th> Matrecule </th>
-                <td>{{ work_certificate.worker.ref  }}</td>
-            </tr>
-            <tr>
-                <th> Poste </th>
-                <td>{{ work_certificate.worker.poste  }}</td>
-            </tr>
-            <tr>
-                <th> Gender  </th>
-                <td>{{ work_certificate.worker.gender }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ work_certificate.createdAt ? work_certificate.createdAt|date('Y-m-d') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <div>
-        <img align="center" src="/img/cnsft.png">
-         <p style="text-align: center;"><br />DEPARTEMENT DE LA ZONE NORD EST</p>
-<p style="text-align: center;">DIVISION ADMINISTRATIVE ET GESTION</p>
-<p style="text-align: left;">TUNIS LE :&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; N&deg;:</p>
-<p style="text-align: left;">&nbsp;</p>
-<p>Je soussign&eacute;, le Chef du D&eacute;partement de la Zona Nord Est, certifie que Mr RABI BAHRI matricule 46628J (TITULAIRE) est au service de la SNCFT en qualit&eacute; d'INSPECTEUR.</p>
-<p>&nbsp;La pr&eacute;sente attestation est d&eacute;livr&eacute;e &agrave; l'int&eacute;ress&eacute; sur sa demande pour servir et valoir ce que de droit.</p>
-<p style="text-align: center;"><u>Le Chef du D&eacute;partement de la Zone Nord Est</u></p>
-<p style="text-align: center;"><u>HABIB CHALGHOUMI</u></p></div>
-    <button class="btn">Imprimer</button>
-    <a href="{{ path('app_work_certificate_index') }}">back to list</a>
-    
-    <a href="{{ path('app_work_certificate_edit', {'id': work_certificate.id}) }}">edit</a>
-
-    {{ include('work_certificate/_delete_form.html.twig') }}
-{% endblock %}
+  <div style="margin-top: 200px ; font-size: 16px">
+     Créé par : {{ work_certificate.createdBy.fullname }}
+  </div>
+</body>
+</html>

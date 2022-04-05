@@ -14,6 +14,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 /**
  * @Route("/workcertificate")
  */
@@ -75,6 +78,7 @@ class WorkCertificateController extends AbstractController
      */
     public function show(WorkCertificate $workCertificate): Response
     {
+        $this->generatePdf($workCertificate);
         return $this->render('work_certificate/show.html.twig', [
             'work_certificate' => $workCertificate,
         ]);
@@ -109,5 +113,34 @@ class WorkCertificateController extends AbstractController
         }
 
         return $this->redirectToRoute('app_work_certificate_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    private function generatePdf($workCertificate)
+    {
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+        
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('work_certificate/show.html.twig', [
+            'work_certificate' => $workCertificate,
+        ]);
+        $dompdf->set_option('isRemoteEnabled',TRUE);
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+        
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("attestation_".$workCertificate->getId().".pdf", [
+            "Attachment" => true
+        ]);
     }
 }
