@@ -140,7 +140,7 @@ class WorkCertificateController extends AbstractController
 
         // Output the generated PDF to Browser (force download)
         $dompdf->stream("attestation_".$workCertificate->getId().".pdf", [
-            "Attachment" => true
+            "Attachment" => false
         ]);
     }
 }
