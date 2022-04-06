@@ -15,6 +15,8 @@
     <link href="/vendor/fontawesome-free/css/all.min.css"
       rel="stylesheet"
       type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.min.css"  rel="stylesheet"
+      type="text/css">   
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
       rel="stylesheet" />
 
@@ -144,21 +146,21 @@
           <a class="nav-link collapsed"
             href="#"
             data-toggle="collapse"
-            data-target="#collapseUtilitie"
+            data-target="#collapseCon"
             aria-expanded="true"
-            aria-controls="collapseUtilities">
+            aria-controls="collapseCon">
             <i class="fas fa-fw fa-wrench"></i>
             <span>consultation</span>
           </a>
-          <div id="collapseUtilitie"
+          <div id="collapseCon"
             class="collapse"
-            aria-labelledby="headingUtilities"
+            aria-labelledby="headingCon"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
               <h6 class="collapse-header">
                 affichage de consultation  
               </h6>
-              <a class="collapse-item" href="utilities-color.html"> Liste d'attestation </a>
+              <a class="collapse-item" href="{{path('app_calander')}}"> calendrier </a>
               <a class="collapse-item" href="utilities-border.html">Borders</a>
               <a class="collapse-item" href="utilities-other.html">Other</a>
             </div>
