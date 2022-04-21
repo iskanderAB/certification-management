@@ -44,15 +44,15 @@ class CertifType extends AbstractType
             ->add('gender', ChoiceType::class, [
                 'choices' => [
                     'Homme' => "H",
-                    'Famme' => "F",
+                    'Femme' => "F",
                 ]
             ])
-            ->add('poste', ChoiceType::class, [
-                'choices' => [
-                    'inspecteur' => "INSPECTEUR",
-                    'another job' => "JOB",
-                ]
-            ])
+            ->add('poste', TextType::class, [
+                'attr'  =>[
+                'placeholder'   => 'Poste . . .',
+                'required' => true
+                ]]
+            )
             ->add('signer',TextType::class,[
                 'attr'  =>[
                     'placeholder'   => 'Signataire . . .',

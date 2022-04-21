@@ -46,7 +46,7 @@
             {% for work_certificate in work_certificates %}
               <tr>
                 <td>
-                  {{ work_certificate.id }}
+                  {{ work_certificate.worker.ref }}
                 </td>
                 <td>
                   {{ work_certificate.createdBy ? work_certificate.createdBy.fullname : '' }}
