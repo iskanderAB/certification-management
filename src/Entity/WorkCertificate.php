@@ -42,6 +42,11 @@ class WorkCertificate
      */
     private $signer;
 
+    /**
+     * @ORM\Column(type="string", length=3)
+     */
+    private $lang;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class WorkCertificate
     public function setSigner(string $signer): self
     {
         $this->signer = $signer;
+
+        return $this;
+    }
+
+    public function getLang(): ?string
+    {
+        return $this->lang;
+    }
+
+    public function setLang(string $lang): self
+    {
+        $this->lang = $lang;
 
         return $this;
     }

@@ -48,6 +48,7 @@ class WorkCertificateController extends AbstractController
             $workCertificate->setCreatedBy($this->getUser());
             $workCertificate->setChef($form['chef']->getData());
             $workCertificate->setSigner($form['signer']->getData());
+            $workCertificate->setLang('fr');
             $reference = explode(' ',trim($form['reference']->getData()))[0];
             if ($workerRepository->findBy(["ref"=> $reference ]) == null){
                 $worker = new Worker();
@@ -91,6 +92,7 @@ class WorkCertificateController extends AbstractController
             $workCertificate->setCreatedBy($this->getUser());
             $workCertificate->setChef($form['chef']->getData());
             $workCertificate->setSigner($form['signer']->getData());
+            $workCertificate->setLang('ar');
             $reference = explode(' ',trim($form['reference']->getData()))[0];
             if ($workerRepository->findBy(["ref"=> $reference ]) == null){
                 $worker = new Worker();
@@ -124,7 +126,7 @@ class WorkCertificateController extends AbstractController
     public function show(WorkCertificate $workCertificate, string $lang="fr"): Response
     {
         
-        $this->generatePdf($workCertificate,$lang);
+        // $this->generatePdf($workCertificate,$lang);
         if($lang == "ar"){
             return $this->render('work_certificate/showarab.html.twig', [
                 'work_certificate' => $workCertificate,
