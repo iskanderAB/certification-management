@@ -28,6 +28,18 @@
 <body>
   <div>
    <img src="{{ app.request.getSchemeAndHttpHost()}}/img/cnsft.png" alt="Mon logo">
+   <div class='head-text'>
+        <span>
+          N&deg;: {{ work_certificate.id }}
+        </span>
+        <span style="margin-left: 70%">
+          
+          TUNIS LE : {{ work_certificate.createdAt ? work_certificate.createdAt|date('Y-m-d') : '' }} 
+        </span>
+    </div>
+    <p style="text-align: left;">
+      &nbsp;
+    </p>
    <div class="title-container">
     <p>
       DEPARTEMENT DE LA ZONE NORD EST
@@ -36,18 +48,14 @@
       DIVISION ADMINISTRATIVE ET GESTION
     </p>
     </div>
-    <div class='head-text'>
-        <span>
-          N&deg;: {{ work_certificate.id }}
-        </span>
-        <span style="margin-left: 50%">
-          
-          TUNIS LE : {{ work_certificate.createdAt ? work_certificate.createdAt|date('Y-m-d') : '' }} 
-        </span>
-    </div>
-    <p style="text-align: left;">
-      &nbsp;
+    <div class="title-container" style="text-decoration: overline;">
+    <p>
+    <br><br><br><br><br><br><br><br>
+      ATTESTATION DE TRAVAIL
+      <br><br><br><br><br><br><br><br>
     </p>
+    </div>
+    
     <p>
       Je soussign&eacute;, le Chef du D&eacute;partement de la Zona {{ work_certificate.chef }}
       certifie que {{ work_certificate.worker.gender == "M" ? "Mr" : "Mme" }} {{ work_certificate.worker.lastname }} {{ work_certificate.worker.firstname }} matricule {{ work_certificate.worker.ref }} ({{ work_certificate.worker.type }}) est au service de
