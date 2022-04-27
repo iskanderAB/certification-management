@@ -1,20 +1,61 @@
 <!DOCTYPE html>
 <html>
-  <head></head>
+  <head>
+  <style>
+        *{
+            font-size: 18; 
+        }
+        img { 
+            width:90%;
+            height:100px;
+            position: relative;
+            display: block;
+            margin-left: 30px;
+            margin-bottom: 50px;
+        }
+        .title-container{
+            font-size: 10px;
+            font-weight: 600;
+            text-align: center;
+            line-height: 60%;
+        }
+        .texte-container{
+            font-size: 9px;
+        
+        }
+        .head-text span{ 
+            float: left;
+            font-size: 15px;
+        }
+    </style>
+  </head>
   <body>
-    <p style="text-align: center;">
-      <br />DIRECTION CENTRALE DE L'EXPLOITATION DU RESEAU FERROVIAIRE TUNISIEN
+  <img src="{{ app.request.getSchemeAndHttpHost()}}/img/cnsft.png" alt="Mon logo">
+  <div class="title-container">
+    <p>
+      DIRECTION CENTRALE DE L'EXPLOITATION DU RESEAU <br><br><br> FERROVIAIRE TUNISIEN
     </p>
-    <p style="text-align: left;">
-      TUNIS LE : {{salary_certificate.createdAt|date('Y/m/d')}} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-      &nbsp; N&deg;: {{ salary_certificate.id }}
+    </div>
+    
+    <div class='head-text'>
+        <span>
+          N&deg;: {{ salary_certificate.id }}
+        </span>
+        <span style="margin-left: 70%">
+          
+          TUNIS LE : {{salary_certificate.createdAt|date('Y/m/d')}} 
+        </span>
+    </div>
+    
+    
+    <div class="title-container" >
+    <p >
+    
+      <u> <H2>ATTESTATION DE SALAIRE</H2></u>
+      
     </p>
-    <p style="text-align: left;">
-      &nbsp;
-    </p>
+    </div>
+    <div class="texte-container">
     <p>
       LE chef du division administrative et gestion certife que:
     </p>
@@ -46,8 +87,8 @@
     <table style="border-collapse: collapse; width: 97.0994%; height: 396px;"
       border="1">
       <tbody>
-        <tr style="height: 18px;">
-          <td style="width: 73.2599%; height: 18px;">
+        <tr style="height: 10px;">
+          <td>
             Element global mensuel
           </td>
           <td style="width: 26.7401%; height: 18px;">
@@ -260,5 +301,6 @@
         RABII BAHRI
       </u>
     </p>
+    </div>
   </body>
 </html>
