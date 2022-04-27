@@ -1,5 +1,40 @@
 <div class='container'>
     {{ form_start(form) }}  
+
+        <div class="form-group">    
+            {{ form_row(form.reference, { 'label': 'Matricule' ,'attr': {'class': 'form-control'}}) }}
+        </div>
+            <datalist id="references-list">
+                {%  for worker in workers %}
+                    <option value="{{worker.ref}} ({{worker.firstname}}-{{worker.lastname}})">
+                {% endfor %}  
+        </datalist>
+       <div class="form-group">
+            {{ form_row(form.chef, {'attr': {'class': 'form-control'}}) }}  
+        </div>    
+        <div class="form-group">
+            {{ form_row(form.firstname, {'attr': {'class': 'form-control'}}) }}   
+        </div>    
+
+        <div class="form-group">
+            {{ form_row(form.lastname, {'attr': {'class': 'form-control'}}) }}   
+        </div>  
+        <div class="form-group">
+            {{ form_row(form.gender, {'attr': {'class': 'form-control'}}) }}          
+        </div>   
+        <div class="form-group">
+            {{ form_row(form.poste, {'attr': {'class': 'form-control'}}) }}          
+        </div>  
+        <div class="form-group">
+            {{ form_row(form.signer, {'attr': {'class': 'form-control'}}) }}          
+        </div>  
+        <div class="form-group">
+            {{ form_row(form.type,{'attr': {'class': 'form-control'}}) }}   
+        </div>         
+
+
+
+
         <div class="form-group row">
             {{ form_row(form.P1, { 'label': 'Element global mensuel ' ,'attr': {'class': 'form-control'}}) }}
         
@@ -51,5 +86,25 @@
             {{ form_row(form.p20, { 'label': 'Autres indemnites ' ,'attr': {'class': 'form-control'}}) }}
         </div>
 
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+        <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+
+       {% block javascripts %}
+        <script>
+            if (document.getElementById('salary_certificate_reference')){
+                document.getElementById("salary_certificate_reference")
+                    .addEventListener("input", function(event){
+                        if(event.inputType == "insertReplacementText" || event.inputType == null) {
+                            console.log(event.target.value.slice(event.target.value.indexOf('(')+1, event.target.value.indexOf(')')));
+                            const fullname = event.target.value.slice(event.target.value.indexOf('(')+1, event.target.value.indexOf(')')).split('-')
+                            document.getElementById('salary_certificate_firstname').value= fullname[0]
+                            document.getElementById('salary_certificate_lastname').value= fullname[1]
+                    }
+                })
+            }
+            else{
+                console.log("bye from salary");
+            }
+        </script>      
+    {% endblock %}
+</div>

@@ -3,8 +3,111 @@
 {% block title %}SalaryCertificate index{% endblock %}
 
 {% block body %}
-    <h1>SalaryCertificate index</h1>
+    <h1>Attestation de salaire</h1>
 
+
+      <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">
+        Liste des demandes d'attestation
+      </h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered"
+          id="dataTable"
+          width="100%"
+          cellspacing="0">
+          <thead>
+            <tr>
+              <th>
+                Matricule
+              </th>
+              <th>
+                Créé par
+              </th>
+              <th>
+                Employée
+              </th>
+              <th>
+                sexe
+              </th>
+              <th>
+                Date de creation
+              </th>
+              <th>
+                Nombre des copies 
+              </th>
+              <th>
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for salary_certificate in salary_certificates %}
+              <tr>
+                <td>
+                  {{ salary_certificate.worker.ref }}
+                </td>
+                <td>
+                  {{ salary_certificate.createdBy ? salary_certificate.createdBy.fullname : '' }}
+                </td>
+                <td>
+                  {{  salary_certificate.worker ? salary_certificate.worker.firstname  : '' }}
+                  {{  salary_certificate.worker ? salary_certificate.worker.lastname : '' }}
+                </td>
+                <td>
+                  {{ salary_certificate.worker.gender == "M" ? "Male" : "Female" 
+                  }}
+                </td>
+                <td>
+                  {{ salary_certificate.createdAt
+                    ? salary_certificate.createdAt|date('Y/m/d')
+                    : '' 
+                  }}
+                </td>
+                <td>
+                  {{ 5 }}
+                </td>
+                <td>
+                  <a href="{{
+                    path(
+                      'app_salary_certificate_show',
+                      {
+                        id: salary_certificate.id
+                      }
+                    )
+                    }}"
+                    target='_blank'
+                    >
+                    show
+                  </a>
+                  <a href="{{
+                    path(
+                      'app_salary_certificate_edit',
+                      {
+                        id: salary_certificate.id
+                      }
+                    )
+                    }}">
+                    edit
+                  </a>
+                </td>
+              </tr>
+            {% else %}
+              <tr>
+                <td colspan="3">
+                  no records found
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+{# 
     <table class="table">
         <thead>
             <tr>
@@ -67,7 +170,7 @@
             </tr>
         {% endfor %}
         </tbody>
-    </table>
+    </table> #}
 
     <a href="{{ path('app_salary_certificate_new') }}">Create new</a>
 {% endblock %}

@@ -117,6 +117,11 @@ class SalaryCertificate
      */
     private $p20;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Worker::class, inversedBy="salaryCertificates")
+     */
+    private $worker;
+
    
 
     public function getId(): ?int
@@ -360,6 +365,18 @@ class SalaryCertificate
     public function setP20(float $p20): self
     {
         $this->p20 = $p20;
+
+        return $this;
+    }
+
+    public function getWorker(): ?Worker
+    {
+        return $this->worker;
+    }
+
+    public function setWorker(?Worker $worker): self
+    {
+        $this->worker = $worker;
 
         return $this;
     }

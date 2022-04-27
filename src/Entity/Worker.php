@@ -59,11 +59,17 @@ class Worker
      */
     private $poste;
 
+    /**
+     * @ORM\OneToMany(targetEntity=SalaryCertificate::class, mappedBy="worker")
+     */
+    private $salaryCertificates;
+
 
 
     public function __construct()
     {
         $this->workCertificates = new ArrayCollection();
+        $this->salaryCertificates = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -187,6 +193,36 @@ class Worker
     public function setPoste(string $poste): self
     {
         $this->poste = $poste;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SalaryCertificate>
+     */
+    public function getSalaryCertificates(): Collection
+    {
+        return $this->salaryCertificates;
+    }
+
+    public function addSalaryCertificate(SalaryCertificate $salaryCertificate): self
+    {
+        if (!$this->salaryCertificates->contains($salaryCertificate)) {
+            $this->salaryCertificates[] = $salaryCertificate;
+            $salaryCertificate->setWorker($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSalaryCertificate(SalaryCertificate $salaryCertificate): self
+    {
+        if ($this->salaryCertificates->removeElement($salaryCertificate)) {
+            // set the owning side to null (unless already changed)
+            if ($salaryCertificate->getWorker() === $this) {
+                $salaryCertificate->setWorker(null);
+            }
+        }
 
         return $this;
     }
