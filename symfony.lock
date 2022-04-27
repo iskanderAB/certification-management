@@ -86,6 +86,9 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.7"
     },
+    "khaled.alshamaa/ar-php": {
+        "version": "v6.2.0"
+    },
     "knplabs/knp-snappy": {
         "version": "v1.4.1"
     },
@@ -252,6 +255,9 @@
         "files": [
             "config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "stella-maris/clock": {
+        "version": "0.1.4"
     },
     "symfony/asset": {
         "version": "v5.4.3"

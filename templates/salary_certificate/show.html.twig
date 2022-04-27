@@ -15,7 +15,7 @@
         }
         .title-container{
             font-size: 10px;
-            font-weight: 600;
+            font-weight: 300;
             text-align: center;
             line-height: 60%;
         }
@@ -33,7 +33,7 @@
   <img src="{{ app.request.getSchemeAndHttpHost()}}/img/cnsft.png" alt="Mon logo">
   <div class="title-container">
     <p>
-      DIRECTION CENTRALE DE L'EXPLOITATION DU RESEAU <br><br><br> FERROVIAIRE TUNISIEN
+      DIRECTION CENTRALE DE L'EXPLOITATION DU RESEAU <br><br><br><br><br><br> FERROVIAIRE TUNISIEN
     </p>
     </div>
     
@@ -57,7 +57,7 @@
     </div>
     <div class="texte-container">
     <p>
-      LE chef du division administrative et gestion certife que:
+     <h1> LE chef du division administrative et gestion certife que:</h1>
     </p>
     <p>
       {{ salary_certificate.worker.gender == "M" ? "Mr" : "Mme" }} 
@@ -91,7 +91,7 @@
           <td>
             Element global mensuel
           </td>
-          <td style="width: 26.7401%; height: 18px;">
+          <td style="width: 10.7401%; height: 10px;">
             {{ salary_certificate.P1 }}
           </td>
         </tr>
@@ -285,13 +285,13 @@
         </tr>
       </tbody>
     </table>
-    <p style="text-align: center;">
+    <p >
       <u>
         Cette attestation est delivr&eacute;e a l'interresse&eacute; sur sa
         demande pour servir et valoir ce que de droit.
       </u>
     </p>
-    <p style="text-align: center;">
+    <p style="text-align: center;" class="texte-container">
       <u>
         LE CHEF DU DEVISION ADMINISTRATIVE ET GESTION
       </u>
