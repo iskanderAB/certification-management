@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New WorkCertificate{% endblock %}
+
+{% block body %}
+    <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">
+        إنشاء شهادة عمل جديدة
+      </h6>
+    </div>
+    <div class="card-body">
+     {{ include('work_certificate/_form_ar.html.twig') }}
+    </div>
+    </div>
+  </div>
+{% endblock %}

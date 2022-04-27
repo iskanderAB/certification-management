@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\WorkCertificate;
 use App\Entity\Worker;
+use App\Form\CertifArType;
 use App\Form\CertifType;
 use App\Form\WorkCertificateType;
 use App\Repository\WorkCertificateRepository;
@@ -73,16 +74,67 @@ class WorkCertificateController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="app_work_certificate_show", methods={"GET"})
+
+
+ /**
+     * @Route("/new-ar", name="app_work_certificate_new_ar", methods={"GET", "POST"})
      */
-    public function show(WorkCertificate $workCertificate): Response
+    public function newAr(Request $request, WorkCertificateRepository $workCertificateRepository,ManagerRegistry $doctrine,WorkerRepository $workerRepository): Response
     {
-        $this->generatePdf($workCertificate);
+        $entityManager = $doctrine->getManager();
+        $workCertificate = new WorkCertificate();
+        
+        $form = $this->createForm(CertifArType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $workCertificate->setCreatedAt(new \DateTime());
+            $workCertificate->setCreatedBy($this->getUser());
+            $workCertificate->setChef($form['chef']->getData());
+            $workCertificate->setSigner($form['signer']->getData());
+            $reference = explode(' ',trim($form['reference']->getData()))[0];
+            if ($workerRepository->findBy(["ref"=> $reference ]) == null){
+                $worker = new Worker();
+                $worker->setFirstname($form['firstname']->getData());
+                $worker->setLastname($form['lastname']->getData());
+                $worker->setRef($form['reference']->getData());
+                $worker->setGender($form['gender']->getData());
+                $worker->setType($form['type']->getData());
+                $worker->setPoste($form['poste']->getData());
+                $entityManager->persist($worker);
+            }
+            else{
+                $worker = $workerRepository->findBy(["ref"=> $reference])[0];
+            }
+            $workCertificate->setWorker($worker); // add worker object 
+            $workCertificateRepository->add($workCertificate);
+            return $this->redirectToRoute('app_work_certificate_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('work_certificate/new_ar.html.twig', [
+            'work_certificate' => $workCertificate,
+            'workers' => $workerRepository->findAll(),
+            'form' => $form,
+        ]);
+    }
+
+
+    /**
+     * @Route("/{id}/{lang}", name="app_work_certificate_show", methods={"GET"})
+     */
+    public function show(WorkCertificate $workCertificate, string $lang="fr"): Response
+    {
+        
+        $this->generatePdf($workCertificate,$lang);
+        if($lang == "ar"){
+            return $this->render('work_certificate/showarab.html.twig', [
+                'work_certificate' => $workCertificate,
+            ]);
+        }
         return $this->render('work_certificate/show.html.twig', [
             'work_certificate' => $workCertificate,
         ]);
     }
+
 
     /**
      * @Route("/{id}/edit", name="app_work_certificate_edit", methods={"GET", "POST"})
@@ -115,7 +167,7 @@ class WorkCertificateController extends AbstractController
         return $this->redirectToRoute('app_work_certificate_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    private function generatePdf($workCertificate)
+    private function generatePdf($workCertificate,$lang=null)
     {
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
@@ -125,9 +177,15 @@ class WorkCertificateController extends AbstractController
         $dompdf = new Dompdf($pdfOptions);
         
         // Retrieve the HTML generated in our twig file
-        $html = $this->renderView('work_certificate/show.html.twig', [
-            'work_certificate' => $workCertificate,
-        ]);
+        if($lang == "ar"){
+            $html = $this->renderView('work_certificate/showarab.html.twig', [
+                'work_certificate' => $workCertificate,
+            ]);
+        }else {
+            $html = $this->renderView('work_certificate/show.html.twig', [
+                'work_certificate' => $workCertificate,
+            ]);
+        }
         $dompdf->set_option('isRemoteEnabled',TRUE);
         // Load HTML to Dompdf
         $dompdf->loadHtml($html);
