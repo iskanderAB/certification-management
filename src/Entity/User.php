@@ -47,9 +47,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $fullName;
 
+    /**
+     * @ORM\OneToMany(targetEntity=SalaryCertificate::class, mappedBy="createdBy")
+     */
+    private $salaryCertificates;
+
     public function __construct()
     {
         $this->workCertificates = new ArrayCollection();
+        $this->salaryCertificates = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -179,6 +185,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setFullName(string $fullName): self
     {
         $this->fullName = $fullName;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SalaryCertificate>
+     */
+    public function getSalaryCertificates(): Collection
+    {
+        return $this->salaryCertificates;
+    }
+
+    public function addSalaryCertificate(SalaryCertificate $salaryCertificate): self
+    {
+        if (!$this->salaryCertificates->contains($salaryCertificate)) {
+            $this->salaryCertificates[] = $salaryCertificate;
+            $salaryCertificate->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSalaryCertificate(SalaryCertificate $salaryCertificate): self
+    {
+        if ($this->salaryCertificates->removeElement($salaryCertificate)) {
+            // set the owning side to null (unless already changed)
+            if ($salaryCertificate->getCreatedBy() === $this) {
+                $salaryCertificate->setCreatedBy(null);
+            }
+        }
 
         return $this;
     }

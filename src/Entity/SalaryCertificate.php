@@ -122,6 +122,16 @@ class SalaryCertificate
      */
     private $worker;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="salaryCertificates")
+     */
+    private $createdBy;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $createdAt;
+
    
 
     public function getId(): ?int
@@ -377,6 +387,30 @@ class SalaryCertificate
     public function setWorker(?Worker $worker): self
     {
         $this->worker = $worker;
+
+        return $this;
+    }
+
+    public function getCreatedBy(): ?User
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(?User $createdBy): self
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

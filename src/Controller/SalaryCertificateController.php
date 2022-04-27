@@ -40,8 +40,7 @@ class SalaryCertificateController extends AbstractController
         $form = $this->createForm(SalaryCertificateType::class);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            
+        if ($form->isSubmitted() && $form->isValid()) { 
             $salaryCertificate->setP1($form['P1']->getData());
             $salaryCertificate->setP2($form['p2']->getData());
             $salaryCertificate->setP3($form['p3']->getData());
@@ -62,7 +61,8 @@ class SalaryCertificateController extends AbstractController
             $salaryCertificate->setP18($form['p18']->getData());
             $salaryCertificate->setP19($form['p19']->getData());
             $salaryCertificate->setP20($form['p20']->getData());
-            
+            $salaryCertificate->setCreatedAt(new \DateTime());
+            $salaryCertificate->setCreatedBy($this->getUser());
             $reference = explode(' ',trim($form['reference']->getData()))[0];
             if ($workerRepository->findBy(["ref"=> $reference ]) == null){
                 $worker = new Worker();

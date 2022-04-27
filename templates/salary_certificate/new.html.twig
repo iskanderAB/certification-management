@@ -3,9 +3,15 @@
 {% block title %}New SalaryCertificate{% endblock %}
 
 {% block body %}
-    <h1>Create new SalaryCertificate</h1>
-
+    <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">
+        Créer un nouveau Attestation de salaire
+      </h6>
+    </div>
+    <div class="card-body">
     {{ include('salary_certificate/_form.html.twig') }}
-
-    <a href="{{ path('app_salary_certificate_index') }}">back to list</a>
+    </div>
+    </div>
+  </div>
 {% endblock %}

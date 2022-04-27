@@ -6,11 +6,11 @@
       <br />DIRECTION CENTRALE DE L'EXPLOITATION DU RESEAU FERROVIAIRE TUNISIEN
     </p>
     <p style="text-align: left;">
-      TUNIS LE :&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      TUNIS LE : {{salary_certificate.createdAt|date('Y/m/d')}} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-      &nbsp; N&deg;:
+      &nbsp; N&deg;: {{ salary_certificate.id }}
     </p>
     <p style="text-align: left;">
       &nbsp;
@@ -19,8 +19,10 @@
       LE chef du division administrative et gestion certife que:
     </p>
     <p>
-      MR KHMAIES TLICH matricule 2458745G (TITULAIRE) percoit un salaire mensuel
-      brut #{% set sb = salary_certificate.p20 + salary_certificate.p19
+      {{ salary_certificate.worker.gender == "M" ? "Mr" : "Mme" }} 
+      {{ salary_certificate.worker.firstname }} 
+      {{ salary_certificate.worker.lastname }} matricule {{salary_certificate.worker.ref}} ({{salary_certificate.worker.type}}) percoit un salaire mensuel
+      brut {% set sb = salary_certificate.p20 + salary_certificate.p19
         + salary_certificate.p18
         + salary_certificate.p17
         + salary_certificate.p16
@@ -39,7 +41,7 @@
         + salary_certificate.p3
         + salary_certificate.p2
         + salary_certificate.p1
-      %} {{ sb }}# ,se decomposant comme suit:
+      %} {{ sb }} ,se decomposant comme suit:
     </p>
     <table style="border-collapse: collapse; width: 97.0994%; height: 396px;"
       border="1">
