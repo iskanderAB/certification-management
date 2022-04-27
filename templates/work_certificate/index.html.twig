@@ -73,15 +73,20 @@
                     path(
                       'app_work_certificate_show',
                       {
-                        id: work_certificate.id
+                        id: work_certificate.id,
+                        lang: work_certificate.lang
                       }
                     )
                     }}"
                     target='_blank'
                     >
-                    show
+                    {% if work_certificate.lang == 'ar' %}
+                        اضهر 
+                    {% else %}
+                        afficher
+                    {% endif %}        
                   </a>
-                  <a href="{{
+                  {# <a href="{{
                     path(
                       'app_work_certificate_edit',
                       {
@@ -90,7 +95,7 @@
                     )
                     }}">
                     edit
-                  </a>
+                  </a> #}
                 </td>
               </tr>
             {% else %}
