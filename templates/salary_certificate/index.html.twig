@@ -30,7 +30,7 @@
                 Employée
               </th>
               <th>
-                sexe
+                genre
               </th>
               <th>
                 Date de creation
@@ -53,11 +53,11 @@
                   {{ salary_certificate.createdBy ? salary_certificate.createdBy.fullname : '' }}
                 </td>
                 <td>
-                  {{  salary_certificate.worker ? salary_certificate.worker.firstname  : '' }}
-                  {{  salary_certificate.worker ? salary_certificate.worker.lastname : '' }}
+                  {{  salary_certificate.worker ? salary_certificate.worker.Nom  : '' }}
+                  {{  salary_certificate.worker ? salary_certificate.worker.Prenom : '' }}
                 </td>
                 <td>
-                  {{ salary_certificate.worker.gender == "M" ? "Male" : "Female" 
+                  {{ salary_certificate.worker.Genre == "H" ? "Homme" : "Femme" 
                   }}
                 </td>
                 <td>

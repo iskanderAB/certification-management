@@ -7,34 +7,35 @@
         </div>
             <datalist id="references-list">
                 {%  for worker in workers %}
-                    <option value="{{worker.ref}} ({{worker.firstname}}-{{worker.lastname}})">
+                    <option value="{{worker.ref}} ({{worker.Nom}}-{{worker.Prenom}})">
                 {% endfor %}  
             </datalist>
         <div class="form-group">
             {{ form_row(form.chef, {'attr': {'class': 'form-control'}}) }}  
         </div>    
         <div class="form-group">
-            {{ form_row(form.firstname, {'attr': {'class': 'form-control'}}) }}   
+            {{ form_row(form.Nom, {'attr': {'class': 'form-control'}}) }}   
         </div>    
 
         <div class="form-group">
-            {{ form_row(form.lastname, {'attr': {'class': 'form-control'}}) }}   
+            {{ form_row(form.Prenom, {'attr': {'class': 'form-control'}}) }}   
         </div>  
         <div class="form-group">
-            {{ form_row(form.gender, {'attr': {'class': 'form-control'}}) }}          
+            {{ form_row(form.Genre, {'attr': {'class': 'form-control'}}) }}          
         </div>   
         <div class="form-group">
             {{ form_row(form.poste, {'attr': {'class': 'form-control'}}) }}          
         </div>  
         <div class="form-group">
-            {{ form_row(form.signer, {'attr': {'class': 'form-control'}}) }}          
+            {{ form_row(form.Signature, {'attr': {'class': 'form-control'}}) }}          
         </div>  
         <div class="form-group">
-            {{ form_row(form.type,{'attr': {'class': 'form-control'}}) }}   
+            {{ form_row(form.type,{'label': ' Situation' ,'attr': {'class': 'form-control'}}) }}   
         </div>         
-
-        <button class="btn btn-success">{{ button_label|default('Save') }}</button>
-        <button class="btn btn-primary">{{ button_label|default('Imprimer') }}</button>
+        <div class="row">
+            {{ form_row(form.save,{'label': 'sauvegarder' ,'attr': {'class': 'btn btn-success'}}) }}   
+            {{ form_row(form.print,{'label': 'imprimer' ,'attr': {'class': 'btn btn-primary'}}) }}   
+        </div>   
     {{ form_end(form) }}
     {% block javascripts %}
         <script>
@@ -44,8 +45,8 @@
                         if(event.inputType == "insertReplacementText" || event.inputType == null) {
                             console.log(event.target.value.slice(event.target.value.indexOf('(')+1, event.target.value.indexOf(')')));
                             const fullname = event.target.value.slice(event.target.value.indexOf('(')+1, event.target.value.indexOf(')')).split('-')
-                            document.getElementById('certif_firstname').value= fullname[0]
-                            document.getElementById('certif_lastname').value= fullname[1]
+                            document.getElementById('certif_Nom').value= fullname[0]
+                            document.getElementById('certif_Prenom').value= fullname[1]
 
                     }
                 })

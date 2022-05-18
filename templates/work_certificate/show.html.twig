@@ -2,6 +2,22 @@
 <html>
 <head>
     <style>
+    {# @media print {
+        body * {
+            visibility: hidden; // part to hide at the time of print
+            -webkit-print-color-adjust: exact !important; // not necessary use  if colors not visible
+        }
+
+        #printBtn {
+            visibility: hidden !important; // To hide 
+        }
+
+        #page-wrapper * {
+            visibility: visible; // Print only required part
+            text-align: left;
+            -webkit-print-color-adjust: exact !important;
+        }
+    } #}
         *{
             font-size: 18; 
             font-family: DejaVu Sans, sans-serif; 
@@ -25,62 +41,103 @@
             font-size: 16px;
         }
     </style>
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
 </head>
 <body>
-  <div>
+  <div id="dvContainer">
+   
+   <div class="title-container">
    <img src="{{ app.request.getSchemeAndHttpHost()}}/img/cnsft.png" alt="Mon logo">
+    <p>
+      DEPARTEMENT DE LA ZONE NORD EST
+    </p>
+    <br><br><br><br><br>
+    <p style="font-family: Arial">
+      DIVISION ADMINISTRATIVE ET GESTION
+    </p>
+    <br><br><br><br><br>
+    </div>
    <div class='head-text'>
         <span>
-          N&deg;: {{ work_certificate.id }}
+        DZNE/DAG  N&deg;: {{ work_certificate.id }}
         </span>
         <span style="margin-left: 70%">
           
           TUNIS LE : {{ work_certificate.createdAt ? work_certificate.createdAt|date('Y-m-d') : '' }} 
         </span>
+        <br>
     </div>
     <p style="text-align: left;">
       &nbsp;
     </p>
-   <div class="title-container">
-    <p>
-      DEPARTEMENT DE LA ZONE NORD EST
-    </p>
-    <p style="">
-      DIVISION ADMINISTRATIVE ET GESTION
-    </p>
-    </div>
-    <div class="title-container" style="text-decoration: overline;">
+   <br><br>
+    <div class="title-container" >
     <p>
     <br><br><br><br><br><br><br><br>
       <u>ATTESTATION DE TRAVAIL</u>
-      <br><br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     </p>
-    </div>
-    
-    <p>
-      Je soussign&eacute;, le Chef du D&eacute;partement de la Zona {{ work_certificate.chef }}
-      certifie que {{ work_certificate.worker.gender == "M" ? "Mr" : "Mme" }} {{ work_certificate.worker.lastname }} {{ work_certificate.worker.firstname }} matricule {{ work_certificate.worker.ref }} ({{ work_certificate.worker.type }}) est au service de
-      la SNCFT en qualit&eacute; d'{{ work_certificate.worker.poste }}.
+    </div>  
+    <div>
+    <p style="line-height: 3em;">
+      &nbsp; &nbsp; &nbsp; &nbsp; Je soussign&eacute;, <span style="text-transform:uppercase;">  {{ work_certificate.chef }}</span> du Départementde la Zone Nord Est,
+      certifie que {{ work_certificate.worker.Genre == "H" ? "Mr" : "Mme" }} <span style="text-transform:uppercase;"> {{ work_certificate.worker.Prenom }} {{ work_certificate.worker.Nom }} </span> matricule {{ work_certificate.worker.ref }} ({{ work_certificate.worker.type }}) est au service de
+      la SNCFT en qualit&eacute; de {{ work_certificate.worker.poste }}.
     </p>
-    <p>
-      &nbsp;La pr&eacute;sente attestation est d&eacute;livr&eacute;e &agrave;
+    <p style="line-height: 3em;">
+      &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;La pr&eacute;sente attestation est d&eacute;livr&eacute;e &agrave;
       l'int&eacute;ress&eacute; sur sa demande pour servir et valoir ce que de
       droit.
     </p>
-    <p style="text-align: center;">
+    <p style="text-align: center; line-height: 2em;">
+    <br><br>
       <u>
-        Le Chef du D&eacute;partement de la Zone Nord Est
-      </u>
+<span style="text-transform:uppercase;">  {{ work_certificate.chef }}</span>      </u>
     </p>
     <p style="text-align: center;">
       <u>
-        {{ work_certificate.signer }}
+      <span style="text-transform:uppercase;">  {{ work_certificate.Signature }}</span>
       </u>
     </p>
+    </div>
   </div>
 
   <div style="margin-top: 200px ; font-size: 16px">
      Créé par : {{ work_certificate.createdBy.fullname }}
   </div>
+        <script>
+    $("document").ready(function () {
+            var divContents = $("#dvContainer").html();
+            var printWindow = window.open('', '', 'height=600,width=1000');
+            printWindow.document.write(`<html><head><title></title> <style> *{
+            font-size: 18; 
+            font-family: DejaVu Sans, sans-serif; 
+        }
+        img { 
+            width:90%;
+            height:100px;
+            position: relative;
+            display: block;
+            margin-left: 30px;
+            margin-bottom: 50px;
+        }
+        .title-container{
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+            line-height: 10%;
+        }
+        .head-text span{ 
+            float: left;
+            font-size: 16px;
+        } </style>`);
+            printWindow.document.write('</head><body>');
+            printWindow.document.write(divContents);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+        });
+        </script>
 </body>
 </html>

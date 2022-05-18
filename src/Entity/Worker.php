@@ -22,12 +22,12 @@ class Worker
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $firstname;
+    private $Nom;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $lastname;
+    private $Prenom;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -52,7 +52,7 @@ class Worker
     /**
      * @ORM\Column(type="string", length=1)
      */
-    private $gender;
+    private $Genre;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -77,26 +77,26 @@ class Worker
         return $this->id;
     }
 
-    public function getFirstname(): ?string
+    public function getNom(): ?string
     {
-        return $this->firstname;
+        return $this->Nom;
     }
 
-    public function setFirstname(?string $firstname): self
+    public function setNom(?string $Nom): self
     {
-        $this->firstname = $firstname;
+        $this->Nom = $Nom;
 
         return $this;
     }
 
-    public function getLastname(): ?string
+    public function getPrenom(): ?string
     {
-        return $this->lastname;
+        return $this->Prenom;
     }
 
-    public function setLastname(string $lastname): self
+    public function setPrenom(string $Prenom): self
     {
-        $this->lastname = $lastname;
+        $this->Prenom = $Prenom;
 
         return $this;
     }
@@ -173,14 +173,14 @@ class Worker
     //     return $this->getId();
     // }   
 
-    public function getGender(): ?string
+    public function getGenre(): ?string
     {
-        return $this->gender;
+        return $this->Genre;
     }
 
-    public function setGender(string $gender): self
+    public function setGenre(string $Genre): self
     {
-        $this->gender = $gender;
+        $this->Genre = $Genre;
 
         return $this;
     }

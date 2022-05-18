@@ -52,11 +52,11 @@
                   {{ work_certificate.createdBy ? work_certificate.createdBy.fullname : '' }}
                 </td>
                 <td>
-                  {{  work_certificate.worker ? work_certificate.worker.firstname  : '' }}
-                  {{  work_certificate.worker ? work_certificate.worker.lastname : '' }}
+                  {{  work_certificate.worker ? work_certificate.worker.Nom  : '' }}
+                  {{  work_certificate.worker ? work_certificate.worker.Prenom : '' }}
                 </td>
                 <td>
-                  {{ work_certificate.worker.gender == "H" ? "Homme" : "Famme" 
+                  {{ work_certificate.worker.Genre == "H" ? "Homme" : "Femme" 
                   }}
                 </td>
                 <td>

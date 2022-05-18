@@ -27,22 +27,22 @@ class SalaryCertificateType extends AbstractType
             ->add('chef', ChoiceType::class, [
                 'choices' => [
                     'le Chef du Département de la Zona Nord Est' => "le Chef du Département de la Zona Nord Est",
-                    'le chef du division administrative et gestion' => "le chef du division administrative et gestion",
+                    'le chef de division administrative et gestion' => "le chef de division administrative et gestion",
                 ]
             ])
-            ->add('firstname',TextType::class,[
+            ->add('Nom',TextType::class,[
                 'attr'  =>[
                     'placeholder'   => 'Nom . . .',
                     'required' => true
                     ]
             ])
-            ->add('lastname',TextType::class,[
+            ->add('Prenom',TextType::class,[
                 'attr'  =>[
                     'placeholder'   => 'prénom . . .',
                     'required' => true
                     ]
             ])
-            ->add('gender', ChoiceType::class, [
+            ->add('Genre', ChoiceType::class, [
                 'choices' => [
                     'Homme' => "H",
                     'Femme' => "F",
@@ -54,16 +54,16 @@ class SalaryCertificateType extends AbstractType
                 'required' => true
                 ]]
             )
-            ->add('signer',TextType::class,[
+            ->add('Signature',TextType::class,[
                 'attr'  =>[
-                    'placeholder'   => 'Signataire . . .',
+                    'placeholder'   => 'Signature . . .',
                     'required' => true
                     ]
             ])
             ->add('type', ChoiceType::class, [
                 'choices' => [
                     'TITULAIRE' => "TITULAIRE",
-                    'STAGIER' => "STAGIER",
+                    'STAGIAIRE' => "STAGIAIRE",
                 ]
             ])
             ->add('P1')

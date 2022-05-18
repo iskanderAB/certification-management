@@ -40,7 +40,7 @@ class WorkCertificate
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $signer;
+    private $Signature;
 
     /**
      * @ORM\Column(type="string", length=3)
@@ -100,14 +100,14 @@ class WorkCertificate
         return $this;
     }
 
-    public function getSigner(): ?string
+    public function getSignature(): ?string
     {
-        return $this->signer;
+        return $this->Signature;
     }
 
-    public function setSigner(string $signer): self
+    public function setSignature(string $Signature): self
     {
-        $this->signer = $signer;
+        $this->Signature = $Signature;
 
         return $this;
     }

@@ -19,7 +19,7 @@ class WorkCertificateType extends AbstractType
                 'class' => Worker::class,
             
                 // uses the User.username property as the visible option string
-                'choice_label' => fn (Worker $worker)=>  $worker->getRef().'-('.$worker->getFirstname() .'_'. $worker->getLastname().')',
+                'choice_label' => fn (Worker $worker)=>  $worker->getRef().'-('.$worker->getNom() .'_'. $worker->getPrenom().')',
                 // used to render a select box, check boxes or radios
                 // 'multiple' => true,
                 // 'expanded' => true,

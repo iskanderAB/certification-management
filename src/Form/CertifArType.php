@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,23 +27,23 @@ class CertifArType extends AbstractType
             ])
             ->add('chef', ChoiceType::class, [
                 'choices' => [
-                    'مدير منطقة الشمال الشرقي' => "مدير منطقة الشمال الشرقي",
-                    'رئيس قسم الادارة و التصرف' => "رئيس قسم الادارة و التصرف",
+                    'مديرية منطقة الشمال الشرقي' => "مديرية منطقة الشمال الشرقي",
+                    'قسم الادارة و التصرف' =>  "قسم الادارة و التصرف",
                 ]
             ])
-            ->add('firstname',TextType::class,[
+            ->add('Nom',TextType::class,[
                 'attr'  =>[
                     'placeholder'   => 'الاسم . . .',
                     'required' => true
                     ]
             ])
-            ->add('lastname',TextType::class,[
+            ->add('Prenom',TextType::class,[
                 'attr'  =>[
                     'placeholder'   => 'اللقب . . .',
                     'required' => true
                     ]
             ])
-            ->add('gender', ChoiceType::class, [
+            ->add('Genre', ChoiceType::class, [
                 'choices' => [
                     'ذكر' => "H",
                     'انثي' => "F",
@@ -53,7 +55,7 @@ class CertifArType extends AbstractType
                 'required' => true
                 ]]
             )
-            ->add('signer',TextType::class,[
+            ->add('Signature',TextType::class,[
                 'attr'  =>[
                     'placeholder'   => 'الموقع  . . .',
                     'required' => true
@@ -64,7 +66,10 @@ class CertifArType extends AbstractType
                     'مترسم' => "مترسم",
                     'متربص' => "متربص",
                 ]
-            ]);
+            ])
+            ->add('save', SubmitType::class, ['label' => 'Create Task'])
+            ->add('print', SubmitType::class, ['label' => 'Save and Add'])
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

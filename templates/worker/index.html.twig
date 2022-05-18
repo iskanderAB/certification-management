@@ -9,11 +9,11 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
+                <th>nom</th>
+                <th>prenom</th>
                 <th>Cin</th>
                 <th>Ref</th>
-                <th>Type</th>
+                <th>Situation</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -21,8 +21,8 @@
         {% for worker in workers %}
             <tr>
                 <td>{{ worker.id }}</td>
-                <td>{{ worker.firstname }}</td>
-                <td>{{ worker.lastname }}</td>
+                <td>{{ worker.Nom }}</td>
+                <td>{{ worker.Prenom }}</td>
                 <td>{{ worker.cin }}</td>
                 <td>{{ worker.ref }}</td>
                 <td>{{ worker.type }}</td>

@@ -13,8 +13,8 @@ class WorkerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstname')
-            ->add('lastname')
+            ->add('Nom')
+            ->add('Prenom')
             ->add('cin')
             ->add('ref')
             ->add('type', ChoiceType::class, [

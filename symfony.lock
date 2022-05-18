@@ -1,4 +1,7 @@
 {
+    "ar-php/ar-php": {
+        "version": "v1.0"
+    },
     "doctrine/annotations": {
         "version": "1.13",
         "recipe": {
@@ -632,6 +635,9 @@
     },
     "twig/extra-bundle": {
         "version": "v3.3.8"
+    },
+    "twig/intl-extra": {
+        "version": "v3.3.5"
     },
     "twig/twig": {
         "version": "v3.3.9"

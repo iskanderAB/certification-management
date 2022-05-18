@@ -4,6 +4,7 @@ namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,22 +27,22 @@ class CertifType extends AbstractType
             ->add('chef', ChoiceType::class, [
                 'choices' => [
                     'le Chef du Département de la Zona Nord Est' => "le Chef du Département de la Zona Nord Est",
-                    'le chef du division administrative et gestion' => "le chef du division administrative et gestion",
+                    'le chef de division administrative et gestion' => "le chef de division administrative et gestion",
                 ]
             ])
-            ->add('firstname',TextType::class,[
+            ->add('Nom',TextType::class,[
                 'attr'  =>[
                     'placeholder'   => 'Nom . . .',
                     'required' => true
                     ]
             ])
-            ->add('lastname',TextType::class,[
+            ->add('Prenom',TextType::class,[
                 'attr'  =>[
                     'placeholder'   => 'prénom . . .',
                     'required' => true
                     ]
             ])
-            ->add('gender', ChoiceType::class, [
+            ->add('Genre', ChoiceType::class, [
                 'choices' => [
                     'Homme' => "H",
                     'Femme' => "F",
@@ -53,7 +54,7 @@ class CertifType extends AbstractType
                 'required' => true
                 ]]
             )
-            ->add('signer',TextType::class,[
+            ->add('Signature',TextType::class,[
                 'attr'  =>[
                     'placeholder'   => 'Signataire . . .',
                     'required' => true
@@ -62,9 +63,11 @@ class CertifType extends AbstractType
             ->add('type', ChoiceType::class, [
                 'choices' => [
                     'TITULAIRE' => "TITULAIRE",
-                    'STAGIER' => "STAGIER",
+                    'STAGIAIRE' => "STAGIAIRE",
                 ]
-            ]);
+            ])
+            ->add('save', SubmitType::class, ['label' => 'Create Task'])
+            ->add('print', SubmitType::class, ['label' => 'Save and Add']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -47,15 +47,15 @@ class WorkCertificateController extends AbstractController
             $workCertificate->setCreatedAt(new \DateTime());
             $workCertificate->setCreatedBy($this->getUser());
             $workCertificate->setChef($form['chef']->getData());
-            $workCertificate->setSigner($form['signer']->getData());
+            $workCertificate->setSignature($form['Signature']->getData());
             $workCertificate->setLang('fr');
             $reference = explode(' ',trim($form['reference']->getData()))[0];
             if ($workerRepository->findBy(["ref"=> $reference ]) == null){
                 $worker = new Worker();
-                $worker->setFirstname($form['firstname']->getData());
-                $worker->setLastname($form['lastname']->getData());
+                $worker->setNom($form['Nom']->getData());
+                $worker->setPrenom($form['Prenom']->getData());
                 $worker->setRef($form['reference']->getData());
-                $worker->setGender($form['gender']->getData());
+                $worker->setGenre($form['Genre']->getData());
                 $worker->setType($form['type']->getData());
                 $worker->setPoste($form['poste']->getData());
                 $entityManager->persist($worker);
@@ -65,7 +65,16 @@ class WorkCertificateController extends AbstractController
             }
             $workCertificate->setWorker($worker); // add worker object 
             $workCertificateRepository->add($workCertificate);
-            return $this->redirectToRoute('app_work_certificate_index', [], Response::HTTP_SEE_OTHER);
+
+            if ($form->getClickedButton() === $form->get('save')){
+                return $this->redirectToRoute('app_work_certificate_index', [], Response::HTTP_SEE_OTHER);
+            }else{
+                return $this->redirectToRoute('app_work_certificate_show', [
+                    'id' => $workCertificate->getId(),
+                    'lang' => 'fr'
+                ], Response::HTTP_SEE_OTHER);
+            }
+            // return $this->redirectToRoute('app_work_certificate_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('work_certificate/new.html.twig', [
@@ -91,15 +100,15 @@ class WorkCertificateController extends AbstractController
             $workCertificate->setCreatedAt(new \DateTime());
             $workCertificate->setCreatedBy($this->getUser());
             $workCertificate->setChef($form['chef']->getData());
-            $workCertificate->setSigner($form['signer']->getData());
+            $workCertificate->setSignature($form['Signature']->getData());
             $workCertificate->setLang('ar');
             $reference = explode(' ',trim($form['reference']->getData()))[0];
             if ($workerRepository->findBy(["ref"=> $reference ]) == null){
                 $worker = new Worker();
-                $worker->setFirstname($form['firstname']->getData());
-                $worker->setLastname($form['lastname']->getData());
+                $worker->setNom($form['Nom']->getData());
+                $worker->setPrenom($form['Prenom']->getData());
                 $worker->setRef($form['reference']->getData());
-                $worker->setGender($form['gender']->getData());
+                $worker->setGenre($form['Genre']->getData());
                 $worker->setType($form['type']->getData());
                 $worker->setPoste($form['poste']->getData());
                 $entityManager->persist($worker);
@@ -109,7 +118,14 @@ class WorkCertificateController extends AbstractController
             }
             $workCertificate->setWorker($worker); // add worker object 
             $workCertificateRepository->add($workCertificate);
-            return $this->redirectToRoute('app_work_certificate_index', [], Response::HTTP_SEE_OTHER);
+            if ($form->getClickedButton() === $form->get('save')){
+                return $this->redirectToRoute('app_work_certificate_index', [], Response::HTTP_SEE_OTHER);
+            }else{
+                return $this->redirectToRoute('app_work_certificate_show', [
+                    'id' => $workCertificate->getId(),
+                    'lang' => 'ar'
+                ], Response::HTTP_SEE_OTHER);
+            }
         }
 
         return $this->renderForm('work_certificate/new_ar.html.twig', [
@@ -126,12 +142,14 @@ class WorkCertificateController extends AbstractController
     public function show(WorkCertificate $workCertificate, string $lang="fr"): Response
     {
         
-        // $this->generatePdf($workCertificate,$lang);
+       
         if($lang == "ar"){
             return $this->render('work_certificate/showarab.html.twig', [
                 'work_certificate' => $workCertificate,
             ]);
         }
+
+        // $this->generatePdf($workCertificate,$lang);
         return $this->render('work_certificate/show.html.twig', [
             'work_certificate' => $workCertificate,
         ]);

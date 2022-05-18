@@ -76,7 +76,7 @@ class WorkerRepository extends ServiceEntityRepository
     public function findFullNames()
     {
         return $this->createQueryBuilder('w')
-            ->orderBy('w.firstname', 'ASC')
+            ->orderBy('w.Nom', 'ASC')
             ->getQuery()
             ->execute()
         ;

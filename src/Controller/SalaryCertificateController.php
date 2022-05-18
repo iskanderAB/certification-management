@@ -66,10 +66,10 @@ class SalaryCertificateController extends AbstractController
             $reference = explode(' ',trim($form['reference']->getData()))[0];
             if ($workerRepository->findBy(["ref"=> $reference ]) == null){
                 $worker = new Worker();
-                $worker->setFirstname($form['firstname']->getData());
-                $worker->setLastname($form['lastname']->getData());
+                $worker->setNom($form['Nom']->getData());
+                $worker->setPrenom($form['Prenom']->getData());
                 $worker->setRef($form['reference']->getData());
-                $worker->setGender($form['gender']->getData());
+                $worker->setGenre($form['Genre']->getData());
                 $worker->setType($form['type']->getData());
                 $worker->setPoste($form['poste']->getData());
                 $entityManager->persist($worker);
